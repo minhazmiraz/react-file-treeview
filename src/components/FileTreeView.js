@@ -8,7 +8,7 @@ const FileTreeView = (props) => {
         <Row>
           <Col className=""></Col>
           <Col className="border col-md-3">
-            <FileTree data={props.data} />
+            <FileTree data={props.data} action={props.action} />
           </Col>
           <Col className=""></Col>
         </Row>

@@ -8,18 +8,25 @@ import {
 
 const FileTree = (props) => {
   const [isToggled, setIsToggled] = useState(props.data.toggled ?? false);
+
   const treeChild =
     props.data.child.length > 0 &&
     props.data.child.map((item) => (
       <div style={{ margin: "10px" }} key={item.id}>
-        <FileTree data={item} />
+        <FileTree data={item} action={props.action} />
       </div>
     ));
+
+  const handleOnClick = () => {
+    if (props.data.child.length) return setIsToggled(!isToggled);
+    else return props.action.fileOnClick(props.data);
+  };
+
   return (
     <div>
       <div
         className="treeName"
-        onClick={() => setIsToggled(!isToggled)}
+        onClick={() => handleOnClick()}
         aria-controls={props.data.id}
         aria-expanded={isToggled}
       >

@@ -24,9 +24,18 @@ function App() {
       },
     ],
   };
+
+  const handleFileOnClick = (file) => {
+    console.log(file);
+  };
+
+  const action = {
+    fileOnClick: handleFileOnClick,
+  };
+
   return (
     <div className="App">
-      <FileTreeView data={data} />
+      <FileTreeView data={data} action={action} />
     </div>
   );
 }
