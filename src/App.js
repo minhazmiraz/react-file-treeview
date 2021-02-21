@@ -1,4 +1,5 @@
 import FileTreeView from "./components/FileTreeView";
+import { Container } from "react-bootstrap";
 
 function App() {
   const data = {
@@ -10,6 +11,14 @@ function App() {
         name: "folder1",
         id: 2,
         child: [
+          {
+            name: "folder3",
+            id: 8,
+            child: [
+              { name: "file5", id: 9, child: [] },
+              { name: "file6", id: 10, child: [] },
+            ],
+          },
           { name: "file1", id: 3, child: [] },
           { name: "file2", id: 4, child: [] },
         ],
@@ -35,7 +44,9 @@ function App() {
 
   return (
     <div className="App">
-      <FileTreeView data={data} action={action} />
+      <Container className="mx-auto mt-5" style={{ width: "300px" }}>
+        <FileTreeView data={data} action={action} />
+      </Container>
     </div>
   );
 }
