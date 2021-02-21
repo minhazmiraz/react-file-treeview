@@ -1,5 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
-import TreeView from "./components/TreeView";
+import FileTreeView from "./components/FileTreeView";
 
 function App() {
   const data = {
@@ -27,15 +26,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Container className="m-5">
-        <Row>
-          <Col className=""></Col>
-          <Col className="border col-md-3">
-            <TreeView data={data} />
-          </Col>
-          <Col className=""></Col>
-        </Row>
-      </Container>
+      <FileTreeView data={data} />
     </div>
   );
 }

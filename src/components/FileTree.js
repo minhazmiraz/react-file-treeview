@@ -6,13 +6,13 @@ import {
   BsFileEarmarkCode,
 } from "react-icons/bs";
 
-const TreeView = (props) => {
+const FileTree = (props) => {
   const [isToggled, setIsToggled] = useState(props.data.toggled ?? false);
   const treeChild =
     props.data.child.length > 0 &&
     props.data.child.map((item) => (
       <div style={{ margin: "10px" }} key={item.id}>
-        <TreeView data={item} />
+        <FileTree data={item} />
       </div>
     ));
   return (
@@ -44,4 +44,4 @@ const TreeView = (props) => {
   );
 };
 
-export default TreeView;
+export default FileTree;
