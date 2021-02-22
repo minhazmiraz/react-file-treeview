@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsArrowsCollapse } from "react-icons/bs";
 import FileTree from "./FileTree";
 
 const FileTreeView = (props) => {
@@ -8,11 +7,13 @@ const FileTreeView = (props) => {
   const handleCollapseAll = (value) => setCollapseAll(value);
 
   return (
-    <div className="border border-primary rounded-top">
-      <div className="alert alert-primary">
-        <span>File Tree View</span>
+    <div className="border rounded-top">
+      <div className="alert">
+        <span>
+          <b>{props.data.name}</b>
+        </span>
         <span className="float-right" onClick={() => setCollapseAll(true)}>
-          <BsArrowsCollapse />
+          <img src="collapse-arrow.png" alt="" width="12" />
         </span>
       </div>
       <div className="px-4 pb-3">
