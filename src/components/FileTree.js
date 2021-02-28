@@ -1,93 +1,96 @@
 import { useState } from "react";
 import { Collapse } from "react-bootstrap";
-import { InlineIcon } from "@iconify/react-with-api";
 import {
-  getIconForFile,
-  getIconForFolder,
-  getIconForOpenFolder,
-} from "vscode-icons-js";
+  getMaterialFolderIcon,
+  getMaterialFileIcon,
+} from "file-extension-icon-js";
 
 const FileTree = (props) => {
-  const [isToggled, setIsToggled] = useState(
-    props.data.toggled === undefined ? false : props.data.toggled
-  );
+  const treeData = props.data;
+  const treeAction = props.action;
+  const treeDecorator = props.decorator;
+  const collapseAll = treeData.id > 1 ? props.collapseAll.collapseAll : false;
 
-  const collapseAll = props.data.id > 1 ? props.collapseAll.collapseAll : false;
+  const [isToggled, setIsToggled] = useState(
+    treeData.toggled === undefined ? false : treeData.toggled
+  );
 
   if (collapseAll && isToggled) setIsToggled(false);
 
   const handleOnClick = () => {
     props.collapseAll.handleCollapseAll(false);
-    if (props.data.child.length) setIsToggled(!isToggled);
-    else props.action.fileOnClick(props.data);
+    if (treeData.child.length) setIsToggled(!isToggled);
+    else treeAction.fileOnClick(treeData);
   };
 
-  const getFolderIcon = (folderName, open = 0) => {
-    return (
-      <InlineIcon
-        icon={
-          "vscode-icons:" +
-          (open
-            ? getIconForOpenFolder(folderName)
-                .split(".")
-                .shift()
-                .replace(/_/g, "-")
-            : getIconForFolder(folderName)
-                .split(".")
-                .shift()
-                .replace(/_/g, "-"))
-        }
-      />
-    );
-  };
+  const treeIcon = (name, type) => {
+    //type: 0 - file, 1 - folder, 2 - open folder
+    let iconSrc = "";
+    let iconAlt = "";
+    switch (type) {
+      case 0:
+        iconSrc = getMaterialFileIcon(name);
+        iconAlt = "file-" + name;
+        break;
+      case 1:
+        iconSrc = getMaterialFolderIcon(name);
+        iconAlt = "folder-" + name;
+        break;
+      case 2:
+        iconSrc = getMaterialFolderIcon(name, 1);
+        iconAlt = "folder-" + name;
+        break;
 
-  const getFileIcon = (fileName) => {
-    return (
-      <InlineIcon
-        icon={
-          "vscode-icons:" +
-          getIconForFile(fileName).split(".").shift().replace(/_/g, "-")
-        }
-      />
+      default:
+        break;
+    }
+
+    const icon = (
+      <img src={iconSrc} alt={iconAlt} width={treeDecorator.iconSize} />
     );
+
+    return <span className="m-1">{icon}</span>;
   };
 
   const treeName = (
     <div onClick={() => handleOnClick()} role="button">
-      {props.data.child.length && !isToggled ? (
+      {treeData.child.length && !isToggled ? (
         <span>
           <img src="right-arrow.png" alt="" width="8" />
-          <span className="m-1">{getFolderIcon(props.data.name)}</span>
+          {treeDecorator.showIcon && treeIcon(treeData.name, 1)}
         </span>
-      ) : props.data.child.length ? (
+      ) : treeData.child.length ? (
         <span>
           <img src="down-arrow.png" alt="" width="8" />
-          <span className="m-1">{getFolderIcon(props.data.name, 1)}</span>
+          {treeDecorator.showIcon && treeIcon(treeData.name, 2)}
         </span>
       ) : (
-        <span className="m-1">{getFileIcon(props.data.name)}</span>
+        treeDecorator.showIcon && treeIcon(treeData.name, 0)
       )}
-      <span style={{ fontSize: "15px" }}>{props.data.name}</span>
+      <span className="m-1" style={{ fontSize: treeDecorator.textSize }}>
+        {treeData.name}
+      </span>
     </div>
   );
 
   const treeChild =
-    props.data.child.length > 0 &&
-    props.data.child.map((item) => (
-      <div style={props.data.id > 1 ? { margin: "10px" } : {}} key={item.id}>
+    treeData.child.length > 0 &&
+    treeData.child.map((item) => (
+      <div style={treeData.id > 1 ? { margin: "10px" } : {}} key={item.id}>
         <FileTree
           data={item}
-          action={props.action}
+          action={treeAction}
           collapseAll={props.collapseAll}
+          decorator={treeDecorator}
         />
       </div>
     ));
 
   return (
-    <div className="tree" id={"tree" + props.data.id}>
-      {props.data.id > 1 && <div className="treeName">{treeName}</div>}
+    <div className="tree" id={"tree" + treeData.id}>
+      {treeData.id > 1 && <div className="treeName">{treeName}</div>}
       <Collapse in={isToggled && !collapseAll}>
-        <div className="treeChild" id={"tree-" + props.data.id + "-child"}>
+        <div className="treeChild" id={"tree-" + treeData.id + "-child"}>
           {treeChild}
         </div>
       </Collapse>

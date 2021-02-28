@@ -42,10 +42,17 @@ function App() {
     fileOnClick: handleFileOnClick,
   };
 
+  const treeDecorator = {
+    showIcon: true,
+    iconSize: 18,
+    textSize: 15,
+    showCollapseAll: true,
+  };
+
   return (
     <div className="App">
       <Container className="mx-auto mt-5" style={{ width: "300px" }}>
-        <FileTreeView data={data} action={action} />
+        <FileTreeView data={data} action={action} decorator={treeDecorator} />
       </Container>
     </div>
   );
