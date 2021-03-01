@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import FileTree from "./FileTree";
 import collapseArrow from "./assets/collapse-arrow.png";
 

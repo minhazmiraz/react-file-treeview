@@ -5,9 +5,12 @@ A simple, flexible file hierarchy tree component for react.
 ## Usage
 
 ```javascript
+//Add Imports*
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import FileTreeView from "react-file-treeview";
 
-//create tree data
+//create tree data*
 const data = {
   name: "treeview",
   id: 1,
@@ -32,7 +35,7 @@ const data = {
   ],
 };
 
-//Create action data
+//Create action data*
 const handleFileOnClick = (file) => {
   console.log(file);
 };
@@ -41,7 +44,7 @@ const action = {
   fileOnClick: handleFileOnClick,
 };
 
-//Create Decoration data
+//Create Decoration data*
 const treeDecorator = {
   showIcon: true,
   iconSize: 18,
@@ -49,7 +52,7 @@ const treeDecorator = {
   showCollapseAll: true,
 };
 
-//Call the FileTreeView Component
+//Call the FileTreeView Component (Props values are manadatory)
 <FileTreeView data={data} action={action} decorator={treeDecorator} />;
 ```
 

@@ -1,6 +1,29 @@
 {
   "name": "react-file-treeview",
-  "version": "0.1.0",
+  "version": "0.1.2",
+  "description": "A simple, flexible file hierarchy tree component for react.",
+  "keywords": [
+    "file-tree",
+    "react",
+    "treeview",
+    "component",
+    "hierarchy-view",
+    "javascript"
+  ],
+  "homepage": "https://github.com/minhazmiraz/react-file-treeview",
+  "bugs": {
+    "url": "https://github.com/minhazmiraz/react-file-treeview/issues"
+  },
+  "author": {
+    "name": "minhazmiraz"
+  },
+  "main": "./dist/FileTreeView.js",
+  "module": "./dist/FileTreeView.js",
+  "typings": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minhazmiraz/react-file-treeview"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -11,7 +34,6 @@
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.0",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.0"
   },
@@ -19,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish:npm": "rm -rf dist && mkdir dist &&  babel ./src/components -d dist --copy-files"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +61,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/preset-react": "^7.12.13"
   }
 }
