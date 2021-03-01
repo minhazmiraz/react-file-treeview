@@ -4,6 +4,8 @@ import {
   getMaterialFolderIcon,
   getMaterialFileIcon,
 } from "file-extension-icon-js";
+import rightArrow from "./assets/right-arrow.png";
+import downArrow from "./assets/down-arrow.png";
 
 const FileTree = (props) => {
   const treeData = props.data;
@@ -20,7 +22,7 @@ const FileTree = (props) => {
   const handleOnClick = () => {
     props.collapseAll.handleCollapseAll(false);
     if (treeData.child.length) setIsToggled(!isToggled);
-    else treeAction.fileOnClick(treeData);
+    else if (treeAction.fileOnClick) treeAction.fileOnClick(treeData);
   };
 
   const treeIcon = (name, type) => {
@@ -56,12 +58,12 @@ const FileTree = (props) => {
     <div onClick={() => handleOnClick()} role="button">
       {treeData.child.length && !isToggled ? (
         <span>
-          <img src="right-arrow.png" alt="" width="8" />
+          <img src={rightArrow} alt="" width="8" />
           {treeDecorator.showIcon && treeIcon(treeData.name, 1)}
         </span>
       ) : treeData.child.length ? (
         <span>
-          <img src="down-arrow.png" alt="" width="8" />
+          <img src={downArrow} alt="" width="8" />
           {treeDecorator.showIcon && treeIcon(treeData.name, 2)}
         </span>
       ) : (

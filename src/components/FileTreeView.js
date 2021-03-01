@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FileTree from "./FileTree";
+import collapseArrow from "./assets/collapse-arrow.png";
 
 const FileTreeView = (props) => {
   const [collapseAll, setCollapseAll] = useState(false);
@@ -13,7 +14,7 @@ const FileTreeView = (props) => {
         onClick={() => setCollapseAll(true)}
         role="button"
       >
-        <img src="collapse-arrow.png" alt="" width="12" />
+        <img src={collapseArrow} alt="collapse-arrow" width="12" />
       </span>
     );
   };
