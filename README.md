@@ -2,6 +2,12 @@
 
 A simple, flexible file hierarchy tree component for react.
 
+## Installation
+
+```
+npm i react-file-treeview
+```
+
 ## Usage
 
 ```javascript
