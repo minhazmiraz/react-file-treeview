@@ -51,7 +51,7 @@ const FileTree = (props) => {
       <img src={iconSrc} alt={iconAlt} width={treeDecorator.iconSize} />
     );
 
-    return <span className="m-1">{icon}</span>;
+    return <span className="mx-1">{icon}</span>;
   };
 
   const treeName = (
@@ -67,9 +67,11 @@ const FileTree = (props) => {
           {treeDecorator.showIcon && treeIcon(treeData.name, 2)}
         </span>
       ) : (
-        treeDecorator.showIcon && treeIcon(treeData.name, 0)
+        <span style={{ marginLeft: "8px" }}>
+          {treeDecorator.showIcon && treeIcon(treeData.name, 0)}
+        </span>
       )}
-      <span className="m-1" style={{ fontSize: treeDecorator.textSize }}>
+      <span className="mx-1" style={{ fontSize: treeDecorator.textSize }}>
         {treeData.name}
       </span>
     </div>
@@ -78,7 +80,19 @@ const FileTree = (props) => {
   const treeChild =
     treeData.child.length > 0 &&
     treeData.child.map((item) => (
-      <div style={treeData.id > 1 ? { margin: "10px" } : {}} key={item.id}>
+      <div
+        style={
+          treeData.id > 1
+            ? {
+                marginLeft: "8px",
+                marginRight: "8px",
+                marginTop: "3px",
+                marginBottom: "3px",
+              }
+            : {}
+        }
+        key={item.id}
+      >
         <FileTree
           data={item}
           action={treeAction}

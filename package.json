@@ -1,6 +1,6 @@
 {
   "name": "react-file-treeview",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "A simple, flexible file hierarchy tree component for react.",
   "keywords": [
     "file-tree",
@@ -24,7 +24,7 @@
     "type": "git",
     "url": "https://github.com/minhazmiraz/react-file-treeview"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
