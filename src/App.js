@@ -1,4 +1,6 @@
-import FileTreeView from "./components/FileTreeView";
+import { useState } from "react";
+import FileTree from "./components/FileTree";
+import collapseArrow from "./components/assets/collapse-arrow.png";
 
 function App() {
   const data = {
@@ -33,6 +35,10 @@ function App() {
     ],
   };
 
+  const [collapseAll, setCollapseAll] = useState(false);
+
+  const handleCollapseAll = (value) => setCollapseAll(value);
+
   const handleFileOnClick = (file) => {
     console.log(file);
   };
@@ -48,10 +54,37 @@ function App() {
     showCollapseAll: true,
   };
 
+  const collapseAllButton = () => {
+    return (
+      <span
+        className="float-right"
+        onClick={() => setCollapseAll(true)}
+        role="button"
+      >
+        <img src={collapseArrow} alt="collapse-arrow" width="12" />
+      </span>
+    );
+  };
+
   return (
     <div className="App">
       <div className="container mx-auto mt-5" style={{ width: "300px" }}>
-        <FileTreeView data={data} action={action} decorator={treeDecorator} />
+        <div className="border rounded-top">
+          <div className="alert">
+            <span>
+              <b>{data.name}</b>
+            </span>
+            {treeDecorator.showCollapseAll && collapseAllButton()}
+          </div>
+          <div className="px-4 pb-3">
+            <FileTree
+              data={data}
+              action={action}
+              collapseAll={{ collapseAll, handleCollapseAll }}
+              decorator={treeDecorator}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

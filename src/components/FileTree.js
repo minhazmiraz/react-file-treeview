@@ -11,7 +11,10 @@ const FileTree = (props) => {
   const treeData = props.data;
   const treeAction = props.action;
   const treeDecorator = props.decorator;
-  const collapseAll = treeData.id > 1 ? props.collapseAll.collapseAll : false;
+  const collapseAll =
+    treeData.id > 1 && props.collapseAll
+      ? props.collapseAll.collapseAll
+      : false;
 
   const [isToggled, setIsToggled] = useState(
     treeData.toggled === undefined ? false : treeData.toggled
@@ -20,9 +23,10 @@ const FileTree = (props) => {
   if (collapseAll && isToggled) setIsToggled(false);
 
   const handleOnClick = () => {
-    props.collapseAll.handleCollapseAll(false);
+    if (props.collapseAll) props.collapseAll.handleCollapseAll(false);
     if (treeData.child.length) setIsToggled(!isToggled);
-    else if (treeAction.fileOnClick) treeAction.fileOnClick(treeData);
+    else if (treeAction && treeAction.fileOnClick)
+      treeAction.fileOnClick(treeData);
   };
 
   const treeIcon = (name, type) => {
@@ -59,19 +63,28 @@ const FileTree = (props) => {
       {treeData.child.length && !isToggled ? (
         <span>
           <img src={rightArrow} alt="" width="8" />
-          {treeDecorator.showIcon && treeIcon(treeData.name, 1)}
+          {treeDecorator &&
+            treeDecorator.showIcon &&
+            treeIcon(treeData.name, 1)}
         </span>
       ) : treeData.child.length ? (
         <span>
           <img src={downArrow} alt="" width="8" />
-          {treeDecorator.showIcon && treeIcon(treeData.name, 2)}
+          {treeDecorator &&
+            treeDecorator.showIcon &&
+            treeIcon(treeData.name, 2)}
         </span>
       ) : (
         <span style={{ marginLeft: "8px" }}>
-          {treeDecorator.showIcon && treeIcon(treeData.name, 0)}
+          {treeDecorator &&
+            treeDecorator.showIcon &&
+            treeIcon(treeData.name, 0)}
         </span>
       )}
-      <span className="mx-1" style={{ fontSize: treeDecorator.textSize }}>
+      <span
+        className="mx-1"
+        style={treeDecorator && { fontSize: treeDecorator.textSize }}
+      >
         {treeData.name}
       </span>
     </div>
@@ -86,8 +99,8 @@ const FileTree = (props) => {
             ? {
                 marginLeft: "8px",
                 marginRight: "8px",
-                marginTop: "3px",
-                marginBottom: "3px",
+                marginTop: "6px",
+                marginBottom: "6px",
               }
             : {}
         }

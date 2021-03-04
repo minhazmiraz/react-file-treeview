@@ -14,52 +14,67 @@ npm i react-file-treeview
 //Add Imports*
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import FileTreeView from "react-file-treeview";
+import FileTree from "react-file-treeview";
 
-//create tree data*
-const data = {
-  name: "treeview",
-  id: 1,
-  toggled: true,
-  child: [
-    {
-      name: "folder1",
-      id: 2,
-      child: [
-        {
-          name: "folder2",
-          id: 5,
-          child: [
-            { name: "file3.py", id: 6, child: [] },
-            { name: "file4.cpp", id: 7, child: [] },
-          ],
-        },
-        { name: "file1.js", id: 3, child: [] },
-        { name: "file2.ts", id: 4, child: [] },
-      ],
-    },
-  ],
-};
+function App() {
+  //create tree data*
+  const data = {
+    name: "treeview",
+    id: 1,
+    toggled: true,
+    child: [
+      {
+        name: "folder1",
+        id: 2,
+        child: [
+          {
+            name: "folder2",
+            id: 5,
+            child: [
+              { name: "file3.py", id: 6, child: [] },
+              { name: "file4.cpp", id: 7, child: [] },
+            ],
+          },
+          { name: "file1.js", id: 3, child: [] },
+          { name: "file2.ts", id: 4, child: [] },
+        ],
+      },
+    ],
+  };
 
-//Create action data*
-const handleFileOnClick = (file) => {
-  console.log(file);
-};
+  //create Collapse button data
+  const [collapseAll, setCollapseAll] = useState(false);
+  const handleCollapseAll = (value) => setCollapseAll(value);
 
-const action = {
-  fileOnClick: handleFileOnClick,
-};
+  //Create file action data*
+  const handleFileOnClick = (file) => {
+    console.log(file);
+  };
 
-//Create Decoration data*
-const treeDecorator = {
-  showIcon: true,
-  iconSize: 18,
-  textSize: 15,
-  showCollapseAll: true,
-};
+  const action = {
+    fileOnClick: handleFileOnClick,
+  };
 
-//Call the FileTreeView Component (Props values are manadatory)
-<FileTreeView data={data} action={action} decorator={treeDecorator} />;
+  //Create Decoration data*
+  const treeDecorator = {
+    showIcon: true,
+    iconSize: 18,
+    textSize: 15,
+    showCollapseAll: true,
+  };
+
+  return (
+    <div>
+      <button onClick={() => setCollapseAll(true)}>Collapse All</button>
+      <FileTree
+        data={data}
+        action={action} //optional
+        collapseAll={{ collapseAll, handleCollapseAll }} //Optional
+        decorator={treeDecorator} //Optional
+      />
+    </div>
+  );
+}
 ```
 
 ### Package Used

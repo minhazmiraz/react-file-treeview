@@ -1,6 +1,6 @@
 {
   "name": "react-file-treeview",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "A simple, flexible file hierarchy tree component for react.",
   "keywords": [
     "file-tree",
