@@ -1,6 +1,6 @@
 {
   "name": "react-file-treeview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple, flexible file hierarchy tree component for react.",
   "keywords": [
     "file-tree",
@@ -17,8 +17,8 @@
   "author": {
     "name": "minhazmiraz"
   },
-  "main": "./dist/FileTreeView.js",
-  "module": "./dist/FileTreeView.js",
+  "main": "./dist/FileTree.js",
+  "module": "./dist/FileTree.js",
   "typings": "./dist/index.d.ts",
   "repository": {
     "type": "git",
