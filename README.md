@@ -5,7 +5,7 @@ A simple, flexible file hierarchy tree component for react.
 ## Installation
 
 ```
-npm i react-file-treeview
+npm i react-file-treeview react-bootstrap bootstrap
 ```
 
 ## Usage
